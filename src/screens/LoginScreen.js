@@ -3,12 +3,20 @@ import {
   StyleSheet, View, Text, TextInput, TouchableHighlight,
 } from 'react-native';
 import firebase from 'firebase';
+// import Timestamp from 'firebase/firestore';
 
 class LoginScreen extends React.Component {
   state = {
     email: 'user1@example.com', // user1@example.com
     password: 'password', // password
   }
+
+  // componentDidMount() {
+  //   const date = new Date();
+  //   console.log(date);
+  //   const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+  //   console.log(timestamp);
+  // }
 
   // eslint-disable-next-line
   handleSubmit() {

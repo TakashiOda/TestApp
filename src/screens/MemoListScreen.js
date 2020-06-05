@@ -28,7 +28,6 @@ class MemoListScreen extends React.Component {
           memoList.push({ ...doc.data(), key: doc.id });
         });
         this.setState({ memoList });
-        // console.log(memoList);
       })
       .catch((error) => {
         console.log(error);

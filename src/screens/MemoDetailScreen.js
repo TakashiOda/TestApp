@@ -3,34 +3,34 @@ import firebase from 'firebase';
 import { StyleSheet, View, Text } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import CircleButton from '../elements/CircleButton';
-
+import 'firebase/firestore';
+// import Timestamp from 'firebase/firestore';
+// <Text style={styles.memoHeaderTitle}>{String(title).substring(0, 10)}</Text>
 class MemoDetailScreen extends React.Component {
   state = {
     memo: {},
   }
 
   componentDidMount() {
-    const { params } = this.props.navigation.state;
-    this.setState({ memo: params.memo });
+    const { memo } = this.props.navigation.state.params;
+    this.setState({ memo });
   }
 
+
   render() {
-    const { memo } = this.state;
-    // const newDate = moment(new Date(1528101680 * 1000)).format('MM/DD/YYYY hh:MM');
-    // const seconds = memo.createdOn.toDate().toISOString();
-    // const seconds = memo.createdOn.timestamp.toDate();
-    // databasesRef.doc(id).update({
-    //   created_at: firebase.firestore.Timestamp.now()
-    // });
-    // console.log(seconds);
+    const { body } = this.state.memo;
+    const title = String(body).substring(0, 10);
+    console.log(this.state.memo.createdOn);
+    const date = String(this.state.memo.createdOn);
+
     return (
       <View style={styles.container}>
         <View style={styles.memoHeader}>
-          <Text style={styles.memoHeaderTitle}>{memo.body}</Text>
-          <Text style={styles.memoHeaderDate}>20202020</Text>
+          <Text style={styles.memoHeaderTitle}>{title}</Text>
+          <Text style={styles.memoHeaderDate}>{date}</Text>
         </View>
         <View style={styles.memoContent}>
-          <Text>{memo.body}</Text>
+          <Text>{body}</Text>
         </View>
         <CircleButton
           color="white"

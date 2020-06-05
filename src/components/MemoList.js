@@ -3,35 +3,22 @@ import {
   StyleSheet, View, Text, TouchableHighlight, FlatList,
 } from 'react-native';
 
-// const { memoList } = this.props.state;
-// const data = memoList;
-
-// function Item({ body }) {
-//   return (
-//     // <TouchableHighlight onPress={() => { this.props.navigation.navigate('Detail'); }}>
-//     <TouchableHighlight>
-//       <View style={styles.memoListItem}>
-//         <Text style={styles.memoTitle}>{body}</Text>
-//         <Text style={styles.memoDate}>2020/20/21</Text>
-//       </View>
-//     </TouchableHighlight>
-//   );
-// }
-
 class MemoList extends React.Component {
   renderMemo({ item }) {
+    // const { body } = item;
+    const date = item.createdOn.toDate().toISOString().split('T')[0];
+    // console.log(body, date);
     return (
-      <TouchableHighlight onPress={() => { this.props.navigation.navigate('Detail', { memo: item }); }}>
+      <TouchableHighlight onPress={() => { this.props.navigation.navigate('Detail', { memo: { body: item.body, createdOn: date } }); }}>
         <View style={styles.memoListItem}>
-          <Text style={styles.memoTitle}>{item.body}</Text>
-          <Text style={styles.memoDate}>2020/04/10</Text>
+          <Text style={styles.memoTitle}>{String(item.body).substring(0, 15)}</Text>
+          <Text style={styles.memoDate}>{date}</Text>
         </View>
       </TouchableHighlight>
     );
   }
 
   render() {
-    // console.log(this.props.memoList);
     return (
       <View style={styles.memoList}>
         <FlatList

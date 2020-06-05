@@ -13,10 +13,12 @@ class MemoCreateScreen extends React.Component {
   handleSubmit() {
     const db = firebase.firestore();
     const { currentUser } = firebase.auth();
+    // const timestamp = firebase.firestore.FieldValue.serverTimestamp();
     // console.log(currentUser.uid);
     db.collection(`users/${currentUser.uid}/memos`).add({
       body: this.state.body,
-      createdOn: new Date(),
+      // createdOn: new Date(),
+      createdOn: firebase.firestore.FieldValue.serverTimestamp(),
     })
       .then(() => {
         // console.log(docRef.id);
