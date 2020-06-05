@@ -9,9 +9,9 @@ class MemoListScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <MemoList />
+        <MemoList navigation={this.props.navigation} />
         <View>
-          <CircleButton>
+          <CircleButton onPress={() => { this.props.navigation.navigate('Edit'); }}>
             <FontAwesome size={36} color="white" name="plus" />
           </CircleButton>
         </View>
@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    backgroundColor: '#FFFDF6',
+    // backgroundColor: '#FFFDF6',
+    backgroundColor: '#ddd',
   },
 });
 
