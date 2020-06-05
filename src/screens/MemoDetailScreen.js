@@ -1,18 +1,36 @@
 import React from 'react';
+import firebase from 'firebase';
 import { StyleSheet, View, Text } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import CircleButton from '../elements/CircleButton';
 
 class MemoDetailScreen extends React.Component {
+  state = {
+    memo: {},
+  }
+
+  componentDidMount() {
+    const { params } = this.props.navigation.state;
+    this.setState({ memo: params.memo });
+  }
+
   render() {
+    const { memo } = this.state;
+    // const newDate = moment(new Date(1528101680 * 1000)).format('MM/DD/YYYY hh:MM');
+    // const seconds = memo.createdOn.toDate().toISOString();
+    // const seconds = memo.createdOn.timestamp.toDate();
+    // databasesRef.doc(id).update({
+    //   created_at: firebase.firestore.Timestamp.now()
+    // });
+    // console.log(seconds);
     return (
       <View style={styles.container}>
         <View style={styles.memoHeader}>
-          <Text style={styles.memoHeaderTitle}>講座のタイトル</Text>
-          <Text style={styles.memoHeaderDate}>2020/22/33</Text>
+          <Text style={styles.memoHeaderTitle}>{memo.body}</Text>
+          <Text style={styles.memoHeaderDate}>20202020</Text>
         </View>
         <View style={styles.memoContent}>
-          <Text>講座のタイトル</Text>
+          <Text>{memo.body}</Text>
         </View>
         <CircleButton
           color="white"
