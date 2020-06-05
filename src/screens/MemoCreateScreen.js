@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
-// import firebase from 'firebase';
+import firebase from 'firebase';
 import { FontAwesome } from '@expo/vector-icons';
 import CircleButton from '../elements/CircleButton';
 
@@ -10,23 +10,22 @@ class MemoCreateScreen extends React.Component {
     body: '',
   }
 
-  // handleSubmit() {
-  //   // const { params } = this.props.navigation.state;
-  //   const db = firebase.firestore();
-  //   const { currentUser } = firebase.auth();
-  //   // console.log(currentUser.uid);
-  //   db.collection(`users/${currentUser.uid}/memos`).add({
-  //     body: this.state.body,
-  //     createdOn: new Date(),
-  //   })
-  //     .then((docRef) => {
-  //       console.log(docRef.id);
-  //       // this.props.navigation.navigate('Home');
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
+  handleSubmit() {
+    const db = firebase.firestore();
+    const { currentUser } = firebase.auth();
+    // console.log(currentUser.uid);
+    db.collection(`users/${currentUser.uid}/memos`).add({
+      body: this.state.body,
+      createdOn: new Date(),
+    })
+      .then(() => {
+        // console.log(docRef.id);
+        this.props.navigation.navigate('Home');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   render() {
     return (
@@ -38,7 +37,11 @@ class MemoCreateScreen extends React.Component {
           blurOnSubmit={false}
           multiline
         />
-        <CircleButton color="ff007f" style={styles.editButton}>
+        <CircleButton
+          color="ff007f"
+          style={styles.editButton}
+          onPress={this.handleSubmit.bind(this)}
+        >
           <FontAwesome size={36} color="white" name="check" />
         </CircleButton>
       </View>

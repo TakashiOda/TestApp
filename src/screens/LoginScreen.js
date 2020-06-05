@@ -2,26 +2,25 @@ import React from 'react';
 import {
   StyleSheet, View, Text, TextInput, TouchableHighlight,
 } from 'react-native';
-// import firebase from 'firebase';
+import firebase from 'firebase';
 
 class LoginScreen extends React.Component {
   state = {
-    email: 'user1@example.com',
-    password: 'password',
+    email: 'user1@example.com', // user1@example.com
+    password: 'password', // password
   }
 
   // eslint-disable-next-line
-  // handleSubmit() {
-  //   // this.props.navigation.navigate('Home')
-  //   firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-  //     .then(() => {
-  //       this.props.navigation.navigate('Home');
-  //     })
-  //     .catch((error) => {
-  //       console.log('error!');
-  //       console.log(error);
-  //     });
-  // }
+  handleSubmit() {
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(() => {
+        this.props.navigation.navigate('Home');
+      })
+      .catch((error) => {
+        console.log('error!');
+        console.log(error);
+      });
+  }
 
   render() {
     return (
@@ -46,7 +45,11 @@ class LoginScreen extends React.Component {
           placeholder="Password"
           secureTextEntry
         />
-        <TouchableHighlight style={styles.button} underlayColor="#c70F66">
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor="#c70F66"
+          onPress={this.handleSubmit.bind(this)}
+        >
           <Text style={styles.buttonTitle}>ログインする</Text>
         </TouchableHighlight>
       </View>
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 24,
     backgroundColor: '#fff',
-    paddingTop: 120,
+    // paddingTop: 120,
   },
   input: {
     backgroundColor: '#eee',

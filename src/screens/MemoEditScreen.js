@@ -19,7 +19,11 @@ class MemoEditScreen extends React.Component {
           value={this.state.body}
           onChangeText={(text) => { this.setState({ body: text }); }}
         />
-        <CircleButton color="ff007f" style={styles.editButton}>
+        <CircleButton
+          color="ff007f"
+          style={styles.editButton}
+          onPress={() => { this.props.navigation.goBack(); }}
+        >
           <FontAwesome size={36} color="white" name="check" />
         </CircleButton>
       </View>

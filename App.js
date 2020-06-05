@@ -1,6 +1,7 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import firebase from 'firebase';
 import { StyleSheet, Text, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 // import Appbar from './src/components/Appbar';
@@ -11,18 +12,31 @@ import MemoListScreen from './src/screens/MemoListScreen';
 import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoCreateScreen from './src/screens/MemoCreateScreen';
 import CircleButton from './src/elements/CircleButton';
+import ENV from './env.json';
+
+const firebaseConfig = {
+  apiKey: ENV.FIREBASE_API_KEY,
+  authDomain: ENV.FIREBASE_AUTH_DOMAIN,
+  databaseURL: ENV.FIREBASE_DB_URL,
+  projectId: ENV.FIREBASE_PRJ_ID,
+  storageBucket: ENV.FIREBASE_STORAGE,
+  messagingSenderId: ENV.FIREBASE_SENDER_ID,
+};
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 const Stack = createStackNavigator(
   {
     Login: LoginScreen,
     Signup: SignupScreen,
-    ホーム: MemoListScreen,
+    Home: MemoListScreen,
     Detail: MemoDetailScreen,
-    MemoCreate: MemoCreateScreen,
+    Create: MemoCreateScreen,
     Edit: MemoEditScreen,
   },
   {
-    initialRouteName: 'ホーム',
+    initialRouteName: 'Login',
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: '#2C4956',
