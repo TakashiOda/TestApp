@@ -1,12 +1,46 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
+import firebase from 'firebase';
+import 'firebase/firestore';
 import { FontAwesome } from '@expo/vector-icons';
 import CircleButton from '../elements/CircleButton';
 
-
 class MemoEditScreen extends React.Component {
   state = {
-    body: 'aaaaaaaaaa',
+    body: '',
+    key: '',
+  }
+
+  componentDidMount() {
+    const { params } = this.props.navigation.state;
+    // console.log('*******************');
+    // console.log(params);
+    this.setState({
+      body: params.body,
+      key: params.key,
+    });
+  }
+
+  handlePress() {
+    const { currentUser } = firebase.auth();
+    const db = firebase.firestore();
+    const newDate = firebase.firestore.Timestamp.now();
+    db.collection(`users/${currentUser.uid}/memos`).doc(this.state.key)
+      .update({
+        body: this.state.body,
+        createdOn: newDate,
+      })
+      .then(() => {
+        this.props.navigation.state.params.returnMemo({
+          body: this.state.body,
+          key: this.state.key,
+          createdOn: newDate,
+        });
+        this.props.navigation.goBack();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
@@ -22,7 +56,7 @@ class MemoEditScreen extends React.Component {
         <CircleButton
           color="ff007f"
           style={styles.editButton}
-          onPress={() => { this.props.navigation.goBack(); }}
+          onPress={this.handlePress.bind(this)}
         >
           <FontAwesome size={36} color="white" name="check" />
         </CircleButton>

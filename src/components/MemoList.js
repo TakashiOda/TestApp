@@ -5,14 +5,14 @@ import {
 
 class MemoList extends React.Component {
   renderMemo({ item }) {
-    // const { body } = item;
-    const date = item.createdOn.toDate().toISOString().split('T')[0];
-    // console.log(body, date);
+    // const date = item.createdOn;
+    // console.log('*********************');
+    // console.log(item);
     return (
-      <TouchableHighlight onPress={() => { this.props.navigation.navigate('Detail', { memo: { body: item.body, createdOn: date } }); }}>
+      <TouchableHighlight onPress={() => { this.props.navigation.navigate('Detail', { memo: { body: item.body, createdOn: item.createdOn, key: item.key } }); }}>
         <View style={styles.memoListItem}>
           <Text style={styles.memoTitle}>{String(item.body).substring(0, 15)}</Text>
-          <Text style={styles.memoDate}>{date}</Text>
+          <Text style={styles.memoDate}>{item.createdOn.toDate().toISOString().split('T')[0]}</Text>
         </View>
       </TouchableHighlight>
     );
@@ -30,11 +30,11 @@ class MemoList extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   memoList: {
     width: '100%',
     flex: 1,
-    // paddingTop: 78,
   },
   memoListItem: {
     padding: 16,
@@ -51,4 +51,5 @@ const styles = StyleSheet.create({
     color: '#a2a2a2',
   },
 });
+
 export default MemoList;

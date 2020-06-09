@@ -5,8 +5,8 @@ import 'firebase/firestore';
 import { FontAwesome } from '@expo/vector-icons';
 import MemoList from '../components/MemoList';
 import CircleButton from '../elements/CircleButton';
-
 // this.props.navigation.navigate('Edit');
+
 
 class MemoListScreen extends React.Component {
   constructor(props) {
@@ -21,6 +21,14 @@ class MemoListScreen extends React.Component {
     const { uid } = currentUser;
     const db = firebase.firestore();
     db.collection(`users/${uid}/memos`)
+      .onSnapshot((querySnapshot) => {
+        const memoList = [];
+        querySnapshot.forEach((doc) => {
+          memoList.push({ ...doc.data(), key: doc.id });
+        });
+        this.setState({ memoList });
+      });
+    /*
       .get()
       .then((querySnapshot) => {
         const memoList = [];
@@ -32,6 +40,7 @@ class MemoListScreen extends React.Component {
       .catch((error) => {
         console.log(error);
       });
+      */
   }
   // eslint-disable-next-line
   handlePress() {
@@ -56,7 +65,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    // backgroundColor: '#FFFDF6',
     backgroundColor: '#ddd',
   },
 });
