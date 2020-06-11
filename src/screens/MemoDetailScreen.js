@@ -2,7 +2,8 @@ import React from 'react';
 // import firebase from 'firebase';
 import { StyleSheet, View, Text } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import CircleButton from '../elements/CircleButton';
+// import CircleButton from '../elements/CircleButton';
+import EditButton from '../elements/EditButton';
 import 'firebase/firestore';
 
 class MemoDetailScreen extends React.Component {
@@ -44,15 +45,14 @@ class MemoDetailScreen extends React.Component {
           <Text style={styles.memoHeaderDate}>{dateYMD}</Text>
         </View>
         <View style={styles.memoContent}>
-          <Text>{body}</Text>
+          <Text>{ body }</Text>
         </View>
-        <CircleButton
+        <EditButton
           color="white"
-          style={styles.editButton}
           onPress={() => { this.props.navigation.navigate('Edit', { ...this.state.memo, returnMemo: this.returnMemo.bind(this) }); }}
         >
           <FontAwesome size={24} color="#E31676" name="pencil" />
-        </CircleButton>
+        </EditButton>
       </View>
     );
   }
@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    // paddingTop: 90,
   },
   memoHeader: {
     height: 120,
@@ -87,9 +86,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     backgroundColor: '#fff',
     flex: 1,
-  },
-  editButton: {
-    top: 50,
   },
 });
 

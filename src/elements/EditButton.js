@@ -4,9 +4,9 @@ import {
 } from 'react-native';
 // import { Ionicons, FontAwesom } from '@expo/vector-icons';
 
-class CircleButton extends React.Component {
+class EditButton extends React.Component {
   render() {
-    const { style, color, onPress } = this.props;
+    const { color, onPress } = this.props;
     let bgColor = '#E31676';
     let textColor = '#fff';
 
@@ -16,11 +16,11 @@ class CircleButton extends React.Component {
     }
     return (
       <TouchableHighlight
-        style={[styles.container, style]}
+        style={styles.container}
         onPress={onPress}
         underlayColor="transparent"
       >
-        <View style={[styles.circleButton, style, { backgroundColor: bgColor }]}>
+        <View style={[styles.circleButton, { backgroundColor: bgColor }]}>
           <Text style={[styles.circleButtonTitle, { color: textColor }]}>
             {this.props.children}
           </Text>
@@ -35,13 +35,15 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     position: 'absolute',
-    bottom: 50,
-    right: 50,
+    top: 85,
+    right: 55,
   },
   circleButton: {
     width: 60,
     height: 60,
     margin: 0,
+    // alignSelf: 'center',
+    // lineHeight: 30,
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
@@ -58,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CircleButton;
+export default EditButton;

@@ -2,7 +2,7 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import firebase from 'firebase';
-// import { StyleSheet, Text, View } from 'react-native';
+import { Platform } from 'react-native';
 // import { FontAwesome } from '@expo/vector-icons';
 // import Appbar from './src/components/Appbar';
 import LoginScreen from './src/screens/LoginScreen';
@@ -40,7 +40,16 @@ const Stack = createStackNavigator(
     initialRouteName: 'Login',
     defaultNavigationOptions: {
       headerStyle: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
         backgroundColor: '#2C4956',
+        ...Platform.select({
+          android: {
+            height: 80,
+          },
+        }),
       },
       headerBackTitle: null,
       headerTintColor: '#fff',

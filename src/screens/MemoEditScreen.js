@@ -50,6 +50,7 @@ class MemoEditScreen extends React.Component {
           multiline
           blurOnSubmit={false}
           value={this.state.body}
+          textAlignVertical="top"
           onChangeText={(text) => { this.setState({ body: text }); }}
         />
         <CircleButton
