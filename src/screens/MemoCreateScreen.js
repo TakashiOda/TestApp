@@ -31,6 +31,7 @@ class MemoCreateScreen extends React.Component {
         <TextInput
           style={styles.memoCreateInput}
           value={this.state.body}
+          textAlignVertical="top"
           onChangeText={(text) => { this.setState({ body: text }); }}
           blurOnSubmit={false}
           multiline
