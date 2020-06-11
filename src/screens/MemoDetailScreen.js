@@ -41,11 +41,11 @@ class MemoDetailScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.memoHeader}>
-          <Text style={styles.memoHeaderTitle}>{body.substring(0, 15)}</Text>
-          <Text style={styles.memoHeaderDate}>{dateYMD}</Text>
+          <Text style={styles.memoHeaderTitle}>{ body.substring(0, 15) || '' }</Text>
+          <Text style={styles.memoHeaderDate}>{dateYMD || '' }</Text>
         </View>
         <View style={styles.memoContent}>
-          <Text>{ body }</Text>
+          <Text>{ body || '' }</Text>
         </View>
         <EditButton
           color="white"
