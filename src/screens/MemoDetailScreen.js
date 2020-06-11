@@ -9,18 +9,24 @@ class MemoDetailScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      body: '',
-      createdOn: '',
-      key: '',
+      memo: {
+        body: '',
+        createdOn: '',
+        key: '',
+      },
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { params } = this.props.navigation.state;
-    // const date = params.memo.createdOn;
     const { memo } = params;
-    // console.log(typeof(memo.createdOn.seconds));
-    this.setState({ body: memo.body, createdOn: memo.createdOn, key: memo.key });
+    this.setState({
+      memo: {
+        body: memo.body,
+        createdOn: memo.createdOn,
+        key: memo.key,
+      },
+    });
   }
 
   returnMemo(memo) {
@@ -28,29 +34,22 @@ class MemoDetailScreen extends React.Component {
   }
 
   render() {
-    const seconds = this.state.createdOn.seconds;
-    const createdDate = new Date(seconds * 1000);
-    console.log(createdDate);
-    const year = createdDate.getFullYear();
-    const month = createdDate.getMonth() + 1;
-    const date = createdDate.getDate();
-    console.log(year);
-    console.log(month);
-    console.log(date);
-
+    const { body } = this.state.memo;
+    const date = new Date(this.state.memo.createdOn.seconds * 1000);
+    const dateYMD = date.toISOString().split('T')[0];
     return (
       <View style={styles.container}>
         <View style={styles.memoHeader}>
-          <Text style={styles.memoHeaderTitle}>{this.state.body}</Text>
-          <Text style={styles.memoHeaderDate}>{`${year}/${month}/${date}`}</Text>
+          <Text style={styles.memoHeaderTitle}>{body.substring(0, 15)}</Text>
+          <Text style={styles.memoHeaderDate}>{dateYMD}</Text>
         </View>
         <View style={styles.memoContent}>
-          <Text>{this.state.body}</Text>
+          <Text>{body}</Text>
         </View>
         <CircleButton
           color="white"
           style={styles.editButton}
-          onPress={() => { this.props.navigation.navigate('Edit', { ...memo, returnMemo: this.returnMemo.bind(this) }); }}
+          onPress={() => { this.props.navigation.navigate('Edit', { ...this.state.memo, returnMemo: this.returnMemo.bind(this) }); }}
         >
           <FontAwesome size={24} color="#E31676" name="pencil" />
         </CircleButton>

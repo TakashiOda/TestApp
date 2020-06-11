@@ -15,14 +15,13 @@ class MemoCreateScreen extends React.Component {
     const { currentUser } = firebase.auth();
     db.collection(`users/${currentUser.uid}/memos`).add({
       body: this.state.body,
-      createdOn: new Date(),
-      // createdOn: firebase.firestore.FieldValue.serverTimestamp(),
+      // createdOn: new Date(),
+      createdOn: firebase.firestore.FieldValue.serverTimestamp(),
     })
       .then(() => {
-        this.props.navigation.navigate('Home');
+        this.props.navigation.goBack();
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
       });
   }
 

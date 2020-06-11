@@ -11,10 +11,9 @@ class MemoEditScreen extends React.Component {
     key: '',
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const { params } = this.props.navigation.state;
-    // console.log('*******************');
-    // console.log(params);
+    console.log(params);
     this.setState({
       body: params.body,
       key: params.key,

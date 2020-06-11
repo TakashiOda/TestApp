@@ -3,11 +3,9 @@ import {
   StyleSheet, View, Text, TouchableHighlight, FlatList,
 } from 'react-native';
 
+
 class MemoList extends React.Component {
   renderMemo({ item }) {
-    // const date = item.createdOn;
-    // console.log('*********************');
-    // console.log(item);
     return (
       <TouchableHighlight onPress={() => { this.props.navigation.navigate('Detail', { memo: { body: item.body, createdOn: item.createdOn, key: item.key } }); }}>
         <View style={styles.memoListItem}>
