@@ -15,6 +15,7 @@ class LoginScreen extends React.Component {
     isLoading: false,
   }
 
+
   async componentDidMount() {
     this.setState({ isLoading: true });
     const email = await SecureStore.getItemAsync('email');
@@ -36,7 +37,7 @@ class LoginScreen extends React.Component {
       actions: [NavigationActions.navigate({ routeName: 'Home' })],
     });
     this.props.navigation.dispatch(resetAction);
-    // this.props.navigation.navigate('Home');
+    this.props.navigation.navigate('Home');
   }
 
   handleSubmit() {

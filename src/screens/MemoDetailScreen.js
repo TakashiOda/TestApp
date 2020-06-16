@@ -1,8 +1,6 @@
 import React from 'react';
-// import firebase from 'firebase';
 import { StyleSheet, View, Text } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-// import CircleButton from '../elements/CircleButton';
 import EditButton from '../elements/EditButton';
 import 'firebase/firestore';
 
@@ -18,7 +16,7 @@ class MemoDetailScreen extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { params } = this.props.navigation.state;
     const { memo } = params;
     this.setState({
