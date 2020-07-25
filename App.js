@@ -2,12 +2,11 @@ import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import firebase from 'firebase';
-import { Platform, Alert } from 'react-native';
-// import { FontAwesome } from '@expo/vector-icons';
+import { Platform } from 'react-native';
 // Push Notifications
-import { Notifications } from 'expo';
-import * as Permissions from 'expo-permissions';
-import Constants from 'expo-constants';
+// import { Notifications } from 'expo';
+// import * as Permissions from 'expo-permissions';
+// import Constants from 'expo-constants';
 // Push Notifications
 // import Appbar from './src/components/Appbar';
 import LoginScreen from './src/screens/LoginScreen';
@@ -66,32 +65,32 @@ const Stack = createStackNavigator(
 );
 
 export default class App extends React.Component {
-  // eslint-disable-next-line
-  registerForPushNotificationsAsync = async () => {
-    // 実機端末か否かを判定
-    if (Constants.isDevice) {
-      const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
-      let finalStatus = existingStatus;
-
-      // ユーザーによる通知の許可or許可しないが決定していないときのみ
-      if (existingStatus !== 'granted') {
-        const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-        finalStatus = status;
-      }
-
-      // ユーザーが通知許可しなかった場合は処理を抜ける
-      if (finalStatus !== 'granted') return;
-      // デバイストークンを取得する
-      const token = await Notifications.getExpoPushTokenAsync();
-      Alert.alert(token);
-    } else {
-      Alert.alert('プッシュ通知は、実機端末を使用してください。');
-    }
-  };
-
-  componentDidMount() {
-    this.registerForPushNotificationsAsync();
-  }
+//   // eslint-disable-next-line
+//   registerForPushNotificationsAsync = async () => {
+//     // 実機端末か否かを判定
+//     if (Constants.isDevice) {
+//       const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+//       let finalStatus = existingStatus;
+//
+//       // ユーザーによる通知の許可or許可しないが決定していないときのみ
+//       if (existingStatus !== 'granted') {
+//         const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+//         finalStatus = status;
+//       }
+//
+//       // ユーザーが通知許可しなかった場合は処理を抜ける
+//       if (finalStatus !== 'granted') return;
+//       // デバイストークンを取得する
+//       const token = await Notifications.getExpoPushTokenAsync();
+//       Alert.alert(token);
+//     } else {
+//       Alert.alert('プッシュ通知は、実機端末を使用してください。');
+//     }
+//   };
+//
+//   componentDidMount() {
+//     this.registerForPushNotificationsAsync();
+//   }
 
   render() {
     const Layout = createAppContainer(Stack);
